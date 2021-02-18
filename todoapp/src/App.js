@@ -1,0 +1,43 @@
+import React, { Component } from "react";
+import Todos from './Todos.js';
+import AddTodo from './addForm';
+
+class app extends Component {
+  state = {
+    todos: [
+      { id: 1, content: "this is first content of Todos" },
+      { id: 2, content: "this is second content of Todos" }
+    ],
+  };
+
+  delteTodo=(id)=>{
+      console.log(id);
+      const todos=this.state.todos.filter(todo=>{
+        return todo.id !== id
+      });
+      this.setState(
+        {todos}
+      )
+  }
+
+  addTodo=(todo)=>{
+      todo.id=Math.random();
+      let todos=[...this.state.todos,todo];
+      this.setState({
+        todos
+      })
+  }
+
+  
+  render() {
+    return (
+      <div className="todo-app container">
+        <h1 className="center blue-text">Todo's</h1>
+        <Todos todos={this.state.todos} deleteTodo={this.delteTodo}/>
+        <AddTodo addTodo={this.addTodo}/>
+      </div>
+    );
+  }
+}
+
+export default app;
